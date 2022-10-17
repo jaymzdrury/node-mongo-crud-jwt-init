@@ -11,7 +11,7 @@
 `.env` file: 
 ```JavaScript
 URI= "Mongo Uri..."
-ORIGIN= "Website URL..."
+ORIGIN= ["Website URL..."]
 ```
 ***
 
