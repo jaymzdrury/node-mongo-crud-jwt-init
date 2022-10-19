@@ -1,6 +1,8 @@
 import { Document } from "mongoose"
 
-export interface Data {
-    string: string
+export interface UserModel extends Document {
+    email: string,
+    name: string,
+    password: string
+    comparePassword(camdidatePassword: string): Promise<Boolean>
 }
-export interface DataModel extends Data, Document {}

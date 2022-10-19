@@ -11,14 +11,13 @@ export const restResponseTimeHistogram = new client.Histogram({
 });
 
 export function startMetricsServer() {
-  const collectDefaultMetrics = client.collectDefaultMetrics;
+  const collectDefaultMetrics = client.collectDefaultMetrics
 
-  collectDefaultMetrics();
+  collectDefaultMetrics()
 
   app.get("/metrics", async (req, res) => {
-    res.set("Content-Type", client.register.contentType);
-
-    return res.send(await client.register.metrics());
+    res.set("Content-Type", client.register.contentType)
+    return res.send(await client.register.metrics())
   });
 
   app.listen(9100, () => {

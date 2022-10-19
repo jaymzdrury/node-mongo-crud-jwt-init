@@ -12,12 +12,13 @@
 ```JavaScript
 URI= "Mongo Uri..."
 ORIGIN= ["Website URL..."]
+KEY= "JWT Key..."
 ```
 ***
 
 _sanitizeFilter_
 
-`sanitizeFilter` blocks malicious query injections (services/services.ts)
+`sanitizeFilter` blocks malicious query injections (/services)
 
 _joi_
 
@@ -30,3 +31,28 @@ _pino_
 _prom-client_
 
 `prom-client` displays server metrics on http://localhost:9100 (utils/metrics.ts)
+***
+
+### Routes
+
+#### POST: "/signup"
+```JavaScript
+{
+    name: "
+    email: "
+    password: "
+}
+```
+#### POST: "/login"
+```JavaScript
+{
+    email: "
+    password: "
+}
+//returns accessToken & refreshToken
+```
+#### GET: "/"
+#### DELETE: "/logout"
+
+#### Authorization: {Token: accessToken}
+#### Header: {x-refresh: refreshToken}
