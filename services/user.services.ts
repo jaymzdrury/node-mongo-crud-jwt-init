@@ -1,11 +1,11 @@
-import {omit} from 'lodash'
-import {DocumentDefinition, FilterQuery} from 'mongoose'
-import { UserModel } from '../models/interfaces'
+import { omit } from 'lodash'
+import { FilterQuery } from 'mongoose'
+import { UserModel, UserInput } from '../models/interfaces'
 import User from '../models/user.model'
 import timer from '../utils/timer'
 import logger from '../utils/logger'
-import {NotFoundError} from '../errors/not-found'
-const {start, end, responseTime} = timer
+import { NotFoundError } from '../errors/not-found'
+const { start, end, responseTime } = timer
 
 export async function getUser(query: FilterQuery<UserModel>){
     start
@@ -19,7 +19,7 @@ export async function getUser(query: FilterQuery<UserModel>){
     }
 }
 
-export async function signUpUser(input: DocumentDefinition<Omit<UserModel, "comparePassword">>){
+export async function signUpUser(input: UserInput){
     start
     try {
         const user = await User.create(input)
@@ -34,7 +34,7 @@ export async function signUpUser(input: DocumentDefinition<Omit<UserModel, "comp
 export async function validatePassword({email, password}: {email: string, password: string}){
     start
     try {
-        const user = await User.findOne({email}).setOptions({sanitizeFilter: true})
+        const user = await User.findOne({email}).lean().setOptions({sanitizeFilter: true})
         if (!user) return false
     
         const isValid = await user.comparePassword(password)

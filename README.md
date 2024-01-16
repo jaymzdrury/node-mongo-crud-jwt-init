@@ -20,6 +20,10 @@ _sanitizeFilter_
 
 `sanitizeFilter` blocks malicious query injections (/services)
 
+_lean()_
+
+`lean` skips full Mongoose document and returns lighter weight objects
+
 _joi_
 
 `joi` validates API calls (middlewares/joi.ts)
@@ -30,29 +34,47 @@ _pino_
 
 _prom-client_
 
-`prom-client` displays server metrics on http://localhost:9100 (utils/metrics.ts)
+`prom-client` displays server metrics on http://localhost:9100/metrics (utils/metrics.ts)
 ***
 
-### Routes
+### Data Routes
 
-#### POST: "/signup"
+#### GET: "/data"
+#### GET: "/data/:id"
+#### POST: "/data"
 ```JavaScript
 {
-    name: "
-    email: "
-    password: "
+    data: "any string",
 }
 ```
-#### POST: "/login"
+#### PUT: "/data/:id"
 ```JavaScript
 {
-    email: "
-    password: "
+    data: "edited string",
+}
+```
+#### DELETE: "/data/:id"
+
+### Auth Routes
+
+#### POST: "/user/signup"
+```JavaScript
+{
+    name: "",
+    email: "",
+    password: "",
+}
+```
+#### POST: "/user/login"
+```JavaScript
+{
+    email: "",
+    password: "",
 }
 //returns accessToken & refreshToken
 ```
-#### GET: "/"
-#### DELETE: "/logout"
+#### GET: "/user/sessions"
+#### DELETE: "/user/logout"
 
 #### Authorization: {Token: accessToken}
 #### Header: {x-refresh: refreshToken}

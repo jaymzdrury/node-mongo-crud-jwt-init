@@ -4,7 +4,7 @@ import requireUser from '../middleware/requireUser'
 import {Schemas, Validate} from '../middleware/joi'
 const router = express.Router()
 
-router.get('/', requireUser, controllers.getUser)
-router.post('/login', Validate(Schemas.session.create), controllers.login)
-router.delete('/logout', requireUser, controllers.logOut)
+router.get('/user/sessions', requireUser, controllers.getUser)
+router.post('/user/login', Validate(Schemas.session.create), controllers.login)
+router.delete('/user/logout', requireUser, controllers.logOut)
 export = router

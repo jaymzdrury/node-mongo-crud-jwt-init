@@ -4,12 +4,10 @@ import Session, { SessionModel } from "../models/session.model";
 import { verifyJwt, signJwt } from "../utils/jwt";
 import { getUser } from "./user.services";
 import {NotFoundError} from '../errors/not-found'
-import configuration from '../config/config'
 import config from '../config/default'
 import timer from '../utils/timer'
 import logger from "../utils/logger";
 const {start, end, responseTime} = timer
-configuration.config()
 
 export async function postSession(userId: string, userAgent: string) {
   start
@@ -38,7 +36,7 @@ export async function getSessions(query: FilterQuery<SessionModel>) {
 export async function updateSession(query: FilterQuery<SessionModel>, update: UpdateQuery<SessionModel>) {
   start
   try {
-    const session = Session.updateOne(query, update).setOptions({sanitizeFilter: true})
+    const session = Session.updateOne(query, update).lean().setOptions({sanitizeFilter: true})
     end
     logger.info(`UPDATE: ${responseTime}`)
     return session
@@ -53,7 +51,7 @@ export async function reIssueAccessToken({refreshToken}: {refreshToken: string})
     const { decoded } = verifyJwt(refreshToken);
     if (!decoded || !get(decoded, "session")) return false;
   
-    const session = await Session.findById(get(decoded, "session")).setOptions({sanitizeFilter: true})
+    const session = await Session.findById(get(decoded, "session")).lean().setOptions({sanitizeFilter: true})
     if (!session || !session.valid) return false
   
     const user = await getUser({ _id: session.user})
