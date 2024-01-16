@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
+
 import express, {Application, Request, Response} from 'express'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 import connectDB from './config/db'
