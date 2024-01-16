@@ -1,6 +1,7 @@
 import Joi, {ObjectSchema} from 'joi'
 import {NextFunction, Response, Request} from 'express'
 import {UserModel} from '../models/interfaces'
+import {DataModel} from '../models/data.model'
 import {BadRequestError} from '../errors/bad-request'
 
 export const Validate = (schema: ObjectSchema) => {
@@ -26,6 +27,11 @@ export const Schemas = {
         create: Joi.object<UserModel>({
             email: Joi.string().email().required(),
             password: Joi.string().required()
+        })
+    },
+    data: {
+        create: Joi.object<DataModel>({
+            data: Joi.string().min(2).required()
         })
     }
 }

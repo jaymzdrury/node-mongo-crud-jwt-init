@@ -20,8 +20,8 @@ const options: CorsOptions = {origin: process.env.ORIGIN}
 app.use(cors(options));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
-app.use(deserializeUser)
+app.use(cookieParser());
+app.use(deserializeUser);
 app.use(
   responseTime((req: IncomingMessage, res: ServerResponse<IncomingMessage>, time: number) => {
     if(req?.url){
@@ -36,20 +36,23 @@ app.use(
     }
   })
 );
-routes(app)
+
+app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200));
+routes(app);
 
 app.all('*', async (req: Request, res: Response) => {
   throw new NotFoundError()
 })
 
-startMetricsServer()
+startMetricsServer();
 
 const server: Server<typeof IncomingMessage, typeof ServerResponse> = app.listen(port, () => {
   logger.info(`running on port ${port}`)
 });
+
 process.on('unhandledRejection', (err) => {
-  logger.error(`Error: ${err}`)
-  server.close(() => process.exit(1))
+  logger.error(`Error: ${err}`);
+  server.close(() => process.exit(1));
 })
 
 export {app}

@@ -3,5 +3,5 @@ import controllers from '../controllers/user.controllers'
 import {Schemas, Validate} from '../middleware/joi'
 const router = express.Router()
 
-router.post('/signup', Validate(Schemas.user.create), controllers.signUp)
+router.post('/user/signup', Validate(Schemas.user.create), controllers.signUp)
 export = router

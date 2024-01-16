@@ -5,7 +5,7 @@ config.config()
 const key = <string>process.env.KEY
 
 export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
-    return jwt.sign(object, key, {...(options && options)})
+  return jwt.sign(object, key, {...(options && options)})
 }
   
 export function verifyJwt(token: string) {

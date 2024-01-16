@@ -10,6 +10,7 @@ const login = async (req: Request, res: Response) => {
   if (!user) throw new NotAuthroizedError()
   
   const session = await postSession(user._id, req.get("user-agent") || "")
+
   const accessToken = signJwt({ ...user, session: session._id},{ expiresIn: config.accessTokenExpires })
   const refreshToken = signJwt({ ...user, session: session._id },{ expiresIn: config.refreshTokenExpires })
 
