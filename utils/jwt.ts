@@ -1,6 +1,4 @@
 import jwt from 'jsonwebtoken'
-import config from '../config/config'
-config.config()
 
 const key = <string>process.env.KEY
 

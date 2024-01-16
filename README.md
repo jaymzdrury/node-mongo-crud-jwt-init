@@ -34,7 +34,7 @@ _pino_
 
 _prom-client_
 
-`prom-client` displays server metrics on http://localhost:9100 (utils/metrics.ts)
+`prom-client` displays server metrics on http://localhost:9100/metrics (utils/metrics.ts)
 ***
 
 ### Data Routes

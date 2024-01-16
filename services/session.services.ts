@@ -4,12 +4,10 @@ import Session, { SessionModel } from "../models/session.model";
 import { verifyJwt, signJwt } from "../utils/jwt";
 import { getUser } from "./user.services";
 import {NotFoundError} from '../errors/not-found'
-import configuration from '../config/config'
 import config from '../config/default'
 import timer from '../utils/timer'
 import logger from "../utils/logger";
 const {start, end, responseTime} = timer
-configuration.config()
 
 export async function postSession(userId: string, userAgent: string) {
   start
