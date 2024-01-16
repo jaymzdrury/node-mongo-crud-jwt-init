@@ -40,6 +40,7 @@ _prom-client_
 ### Data Routes
 
 #### GET: "/data"
+#### GET: "/data/:id"
 #### POST: "/data"
 ```JavaScript
 {

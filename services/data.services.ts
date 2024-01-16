@@ -17,6 +17,18 @@ export async function get() {
     }
 }
 
+export async function getOne(query: FilterQuery<DataModel>) {
+    start
+    try {
+        const data = await Data.findOne({_id: query}).lean().setOptions({sanitizeFilter: true})
+        end
+        logger.info(`GET: ${responseTime}`);
+        return data
+    } catch (e: any) {
+        throw new NotFoundError()
+    }
+}
+
 export async function post(input: DataModel) {
     start
     try {
