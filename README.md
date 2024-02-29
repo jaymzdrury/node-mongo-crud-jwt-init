@@ -8,13 +8,15 @@
 
 `npx tsc --init` to manually install `tsconfig.json`
 
-`.env` file: 
+`.env` file:
+
 ```JavaScript
 URI= "Mongo Uri..."
 ORIGIN= ["Website URL..."]
 KEY= "JWT Key..."
 ```
-***
+
+---
 
 _sanitizeFilter_
 
@@ -35,29 +37,37 @@ _pino_
 _prom-client_
 
 `prom-client` displays server metrics on http://localhost:9100/metrics (utils/metrics.ts)
-***
+
+---
 
 ### Data Routes
 
 #### GET: "/data"
+
 #### GET: "/data/:id"
+
 #### POST: "/data"
+
 ```JavaScript
 {
     data: "any string",
 }
 ```
+
 #### PUT: "/data/:id"
+
 ```JavaScript
 {
     data: "edited string",
 }
 ```
+
 #### DELETE: "/data/:id"
 
 ### Auth Routes
 
 #### POST: "/user/signup"
+
 ```JavaScript
 {
     name: "",
@@ -65,7 +75,9 @@ _prom-client_
     password: "",
 }
 ```
+
 #### POST: "/user/login"
+
 ```JavaScript
 {
     email: "",
@@ -73,8 +85,11 @@ _prom-client_
 }
 //returns accessToken & refreshToken
 ```
+
 #### GET: "/user/sessions"
+
 #### DELETE: "/user/logout"
 
 #### Authorization: {Token: accessToken}
+
 #### Header: {x-refresh: refreshToken}

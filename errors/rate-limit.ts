@@ -1,13 +1,13 @@
 import { CustomError } from "./custom-error";
 import logger from "../utils/logger";
 
-export class ForbiddenError extends CustomError {
-  statusCode = 403;
+export class RateLimitError extends CustomError {
+  statusCode = 429;
 
   constructor(public message: string) {
     super(message);
-    logger.error({ message, statusCode: 403 });
-    Object.setPrototypeOf(this, ForbiddenError.prototype);
+    logger.error({ message, statusCode: 429 });
+    Object.setPrototypeOf(this, RateLimitError.prototype);
   }
 
   serializeErrors() {

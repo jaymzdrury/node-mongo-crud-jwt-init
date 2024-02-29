@@ -1,11 +1,11 @@
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
-const key = <string>process.env.KEY
+const key = <string>process.env.KEY;
 
 export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
-  return jwt.sign(object, key, {...(options && options)})
+  return jwt.sign(object, key, { ...(options && options) });
 }
-  
+
 export function verifyJwt(token: string) {
   try {
     const decoded = jwt.verify(token, key);
