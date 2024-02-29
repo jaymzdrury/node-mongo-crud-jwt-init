@@ -13,12 +13,17 @@ const UserSchema: Schema = new Schema(
 );
 
 UserSchema.pre("save", async function (next) {
-  let user;
-  if (!user!.isModified("password")) return next();
+  //@ts-ignore
+  let user = this as UserModel;
 
-  const salt = await bcrypt.genSalt(<number>config.saltWorkFactor);
-  const hash = bcrypt.hashSync(user!.password, salt);
-  user!.password = hash;
+  if (!user.isModified("password")) {
+    return next();
+  }
+
+  const salt = await bcrypt.genSalt(config.saltWorkFactor);
+  const hash = await bcrypt.hashSync(user.password, salt);
+  user.password = hash;
+
   return next();
 });
 
